@@ -5,6 +5,15 @@ import { App } from './App';
 // Import and invoke the calendar initializer so it starts polling for the
 // container and jQuery. The module exports a default function that begins
 // the startup polling when called.
+// Ensure jQuery is available synchronously by bundling it. This avoids
+// relying on the CDN in production where the resource may be blocked.
+import $ from 'jquery';
+(window as any).jQuery = $;
+(window as any).$ = $;
+
+// Import and invoke the calendar initializer so it starts polling for the
+// container and jQuery. The module exports a default function that begins
+// the startup polling when called.
 import initCalendar from './calendar.js';
 
 const rootElement = document.getElementById('root');
