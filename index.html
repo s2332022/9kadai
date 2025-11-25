@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>デモ</title>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              primary: '#3b82f6',
+              secondary: '#64748b',
+            }
+          }
+        }
+      }
+    </script>
+<link rel="stylesheet" href="/index.css">
+</head>
+  <body class="bg-slate-50 text-slate-900 antialiased">
+    <div id="root"></div>
+  <script type="module" src="/index.tsx"></script>
+  <!-- jQuery カレンダー用スクリプト -->
+  <script src="/calendar.js"></script>
+</body>
+</html>
