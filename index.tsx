@@ -1,6 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { App } from './App';
+// Import calendar script so Vite bundles it and asset paths respect `base`
+import './calendar.js';
 
 const rootElement = document.getElementById('root');
 if (!rootElement) {

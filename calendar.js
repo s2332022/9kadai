@@ -3,27 +3,29 @@
    - Prev/Next month, highlights today and selected date
    - Uses Tailwind utility classes present via CDN in index.html
 */
-(function () {
-  if (typeof window === 'undefined') return;
-  var $ = window.jQuery;
+// ES module version of calendar. Export init() so bundlers include it in the
+// main bundle rather than leaving a separate /calendar.js file reference.
+// Keep a local `$` reference which we set once jQuery is available.
+var $ = null;
 
-  function startWhenReady() {
-    var attempts = 0;
-    var maxAttempts = 60;
-    var iv = setInterval(function () {
-      attempts++;
-      // Wait until both the container exists and jQuery is loaded
-      var el = document.getElementById('jquery-calendar');
-      if (el && window.jQuery) {
-        clearInterval(iv);
-        initCalendar(window.jQuery(el));
-        return;
-      }
-      if (attempts >= maxAttempts) {
-        clearInterval(iv);
-      }
-    }, 100);
-  }
+function startWhenReady() {
+  var attempts = 0;
+  var maxAttempts = 60;
+  var iv = setInterval(function () {
+    attempts++;
+    // Wait until both the container exists and jQuery is loaded
+    var el = document.getElementById('jquery-calendar');
+    if (el && window.jQuery) {
+      clearInterval(iv);
+      $ = window.jQuery;
+      initCalendar($(el));
+      return;
+    }
+    if (attempts >= maxAttempts) {
+      clearInterval(iv);
+    }
+  }, 100);
+}
 
   function formatMonthYear(date) {
     return date.toLocaleString(undefined, { month: 'long', year: 'numeric' });
@@ -121,6 +123,7 @@
     buildCalendar($container, new Date(now.getFullYear(), now.getMonth(), 1), null);
   }
 
-  // Start when DOM / React has likely rendered the #jquery-calendar and jQuery is available
+// Export a default initializer so it can be imported and invoked from the app
+export default function initCalendarModule() {
   startWhenReady();
-})();
+}
