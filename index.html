@@ -5,9 +5,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>デモ</title>
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-    <!-- Tailwind CSS is built via PostCSS during the build (removed CDN for production) -->
-  <script type="module" crossorigin src="/9kadai/assets/index-DHdUItOl.js"></script>
-  <link rel="stylesheet" crossorigin href="/9kadai/assets/index-Dhqmgad8.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              primary: '#3b82f6',
+              secondary: '#64748b',
+            }
+          }
+        }
+      }
+    </script>
+  <script type="module" crossorigin src="/9kadai/assets/index-Dwzysd1t.js"></script>
+  <link rel="stylesheet" crossorigin href="/9kadai/assets/index-OyW_Vq6D.css">
 </head>
   <body class="bg-slate-50 text-slate-900 antialiased">
     <div id="root"></div>
