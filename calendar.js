@@ -21,10 +21,32 @@ function startWhenReady() {
       initCalendar($(el));
       return;
     }
+    // If element exists but jQuery is not present, try to load jQuery dynamically once
+    if (el && !window.jQuery && attempts === 1) {
+      ensurejQueryLoaded();
+    }
     if (attempts >= maxAttempts) {
       clearInterval(iv);
     }
   }, 100);
+}
+
+// Dynamically insert jQuery script tag if jQuery isn't present. This is a
+// fallback for environments where the CDN script might be blocked or not yet loaded.
+function ensurejQueryLoaded() {
+  if (window.jQuery) return;
+  if (document.getElementById('jquery-cdn-fallback')) return;
+  var s = document.createElement('script');
+  s.id = 'jquery-cdn-fallback';
+  s.src = 'https://code.jquery.com/jquery-3.7.1.min.js';
+  s.async = true;
+  s.onload = function () {
+    // jQuery loaded, nothing else needed; startWhenReady polling will detect it
+  };
+  s.onerror = function () {
+    console.warn('Failed to load jQuery from CDN fallback');
+  };
+  document.head.appendChild(s);
 }
 
   function formatMonthYear(date) {
